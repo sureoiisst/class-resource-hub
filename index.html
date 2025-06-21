@@ -1,10 +1,3 @@
-Here’s the **full HTML** you can paste into your GitHub site or editor. It includes the main layout and subject links you've set:
-
----
-
-### ✅ Full Working HTML Code
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +7,7 @@ Here’s the **full HTML** you can paste into your GitHub site or editor. It inc
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #fff;
+      background-color: #e1f5e1;
       margin: 0;
       padding: 20px;
       color: #333;
@@ -69,6 +62,11 @@ Here’s the **full HTML** you can paste into your GitHub site or editor. It inc
       content: " 🔴";
     }
 
+    .subject.specialized {
+      background-color: #ffe6e6;
+      border-color: #ff8080;
+    }
+
     h2 {
       margin-top: 0;
       font-size: 1.2rem;
@@ -91,9 +89,60 @@ Here’s the **full HTML** you can paste into your GitHub site or editor. It inc
     .hidden {
       display: none;
     }
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: none;
+      padding: 10px 15px;
+      background-color: #b00000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .dark-mode {
+      background-color: #111;
+      color: #eee;
+    }
+
+    .dark-mode .subject.specialized {
+      background-color: #331010;
+      border-color: #772222;
+    }
+
+    .dark-mode .subject {
+      background-color: #222;
+      border-color: #444;
+    }
+
+    .dark-mode a {
+      background-color: #ff4400;
+    }
+
+    .upload-link {
+      text-decoration: none;
+      background-color: #555;
+      padding: 6px 10px;
+      border-radius: 5px;
+      color: #fff;
+    }
+
+    .upload-link:hover {
+      background-color: #777;
+    }
+
+    .show-uploads .upload-link {
+      display: inline-block !important;
+    }
   </style>
 </head>
 <body>
+
+  <button onclick="toggleUploads()" style="position: fixed; bottom: 80px; right: 30px; padding: 10px; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 999;">🔐 Teacher Upload Access</button>
+  <button id="darkModeToggle" onclick="toggleDarkMode()" style="position: fixed; top: 20px; right: 20px; padding: 10px; border: none; background-color: #b00000; color: white; border-radius: 5px; cursor: pointer;">🌙 Dark Mode</button>
 
   <h1>11 TVL 6 Resource Hub</h1>
 
@@ -104,76 +153,64 @@ Here’s the **full HTML** you can paste into your GitHub site or editor. It inc
   </div>
 
   <div class="content">
-    <div class="subject specialized" id="css">
-      <h2>CSS</h2>
-      <a href="https://drive.google.com/drive/folders/1D84hULwg2iCnaPhceH8Io09vO-MhxoJB" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="oralcom">
-      <h2>Oral Communication</h2>
-      <a href="https://drive.google.com/drive/folders/1xXo0C9r7PtTSdlzuqghuqmiUtyoq4wN-" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="kompan">
-      <h2>Kom Pan</h2>
-      <a href="https://drive.google.com/drive/folders/1MHe-9bYBZW2veoIrSaTtSdxm8nPB4-5B" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="genmath">
-      <h2>General Mathematics</h2>
-      <a href="https://drive.google.com/drive/folders/1XfV0yfmEVbW14Nv5aV21NXqUERjPjFEd" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="entrep">
-      <h2>Entrepreneurship</h2>
-      <a href="https://drive.google.com/drive/folders/1u1TtwyRAcrzqbIXC8QCA9oAJXRXnB7L4" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="21stlit">
-      <h2>21st Century Literature</h2>
-      <a href="https://drive.google.com/drive/folders/1OLGx9ntkPpOwa2zDc9YHNdH-kMVNSruF" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="physicalsci">
-      <h2>Physical Science</h2>
-      <a href="https://drive.google.com/drive/folders/11WMI5OCv73GNRw92zGQbRxMbS5oUyjla" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject core" id="etech">
-      <h2>E-Tech</h2>
-      <a href="https://drive.google.com/drive/folders/1aErXUmQjdEbfzz3OmLM8zzzFmbDyq1g8" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject specialized" id="epas">
-      <h2>EPAS</h2>
-      <a href="https://drive.google.com/drive/folders/1UIeT8F_1Voz66VaoMUQRYf9nTo33xiad" target="_blank">📁 View Files</a>
-    </div>
-    <div class="subject specialized" id="hairdressing">
-      <h2>Hairdressing</h2>
-      <a href="https://drive.google.com/drive/folders/1diwlSrtLlMQRQlfbfJ26dqEWtHbnXoSu" target="_blank">📁 View Files</a>
-    </div>
+    <script>
+      const subjects = [
+        { id: 'css', title: 'CSS', link: '1D84hULwg2iCnaPhceH8Io09vO-MhxoJB', type: 'specialized' },
+        { id: 'epas', title: 'EPAS', link: '1UIeT8F_1Voz66VaoMUQRYf9nTo33xiad', type: 'specialized' },
+        { id: 'hairdressing', title: 'Hairdressing', link: '1diwlSrtLlMQRQlfbfJ26dqEWtHbnXoSu', type: 'specialized' },
+        { id: 'oralcom', title: 'Oral Communication', link: '1xXo0C9r7PtTSdlzuqghuqmiUtyoq4wN-', type: 'core' },
+        { id: 'kompan', title: 'Kom Pan', link: '1MHe-9bYBZW2veoIrSaTtSdxm8nPB4-5B', type: 'core' },
+        { id: 'genmath', title: 'Gen Math', link: '1XfV0yfmEVbW14Nv5aV21NXqUERjPjFEd', type: 'core' },
+        { id: 'entrep', title: 'Entrepreneurship', link: '1u1TtwyRAcrzqbIXC8QCA9oAJXRXnB7L4', type: 'core' },
+        { id: '21stlit', title: '21st Century Lit', link: '1OLGx9ntkPpOwa2zDc9YHNdH-kMVNSruF', type: 'core' },
+        { id: 'physicalsci', title: 'Physical Science', link: '11WMI5OCv73GNRw92zGQbRxMbS5oUyjla', type: 'core' },
+        { id: 'etech', title: 'E-Tech', link: '1aErXUmQjdEbfzz3OmLM8zzzFmbDyq1g8', type: 'core' },
+      ];
+
+      document.write(subjects.map(s => `
+        <div class="subject ${s.type}" id="${s.id}">
+          <h2>${s.title}</h2>
+          <a href="https://drive.google.com/drive/folders/${s.link}" target="_blank">📁 View Files</a>
+          <a href="https://drive.google.com/drive/folders/${s.link}" class="upload-link" target="_blank" style="display:none; margin-left: 10px; font-size: 0.9em; background-color:#444;">🔒 Upload (Teachers)</a>
+        </div>
+      `).join(''));
+    </script>
   </div>
 
+  <footer style="text-align:center; margin-top: 40px; font-size: 0.95rem; color: #555;">
+    <hr style="margin-bottom: 10px;">
+    <p>If you’d like to support future creations and projects:</p>
+    <p><strong>📱 GCash:</strong> 0952 655 9245<br><strong>👤 Name:</strong> Gerard Cabugwas</p>
+    <p>🙏 Thank you for your support!</p>
+  </footer>
+
+  <button id="backToTop" onclick="scrollToTop()">⬆ Back to Top</button>
+
   <script>
+    const backToTopBtn = document.getElementById('backToTop');
+    window.onscroll = function () {
+      backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    function toggleUploads() {
+      document.body.classList.toggle('show-uploads');
+    }
+
     function filterSubjects(type) {
       document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`.filter-buttons button[onclick="filterSubjects('${type}')"]`).classList.add('active');
-
-      const allSubjects = document.querySelectorAll('.subject');
-      allSubjects.forEach(subject => {
-        if (type === 'all') {
-          subject.classList.remove('hidden');
-        } else {
-          subject.classList.toggle('hidden', !subject.classList.contains(type));
-        }
+      document.querySelectorAll('.subject').forEach(subject => {
+        subject.classList.toggle('hidden', type !== 'all' && !subject.classList.contains(type));
       });
     }
   </script>
-
 </body>
 </html>
-```
-
----
-
-✅ You can now paste this whole file into your GitHub `index.html`.
-
-Let me know if you want:
-
-* A mobile-friendly tweak
-* “Last updated” info
-* Add a GCash donation section again
-
-You're fully set to go live!
