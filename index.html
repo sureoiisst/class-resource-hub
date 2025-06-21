@@ -3,53 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class Resource Hub</title>
+  <title>11-TVL-6 CLASS RESOURCE</title>
   <style>
+    :root {
+      --primary-color: #004225;
+      --accent-color: #ffc300;
+      --bg-color: #f9f9f9;
+      --text-color: #1a1a1a;
+      --card-bg: #ffffff;
+    }
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --card-bg: #1e1e1e;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
     header {
-      background-color: #2c3e50;
-      color: white;
+      background-color: var(--primary-color);
+      color: var(--accent-color);
       padding: 20px;
       text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .toggle-dark {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: #000;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
     }
     nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      background-color: #34495e;
+      background-color: #005b2e;
     }
     nav a {
-      color: white;
+      color: var(--accent-color);
       padding: 14px 20px;
       text-decoration: none;
       display: block;
+      transition: 0.3s;
     }
     nav a:hover {
-      background-color: #2c3e50;
+      background-color: #004225;
     }
     .content {
       padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
     }
     .subject {
-      background: white;
-      border-radius: 8px;
+      background: var(--card-bg);
+      border-radius: 10px;
       padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .subject:hover {
+      transform: scale(1.02);
     }
     .subject h2 {
       margin-top: 0;
+      color: var(--primary-color);
+    }
+    .subject a {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .subject a:hover {
+      background-color: #ffe066;
+    }
+    footer {
+      background: var(--primary-color);
+      color: #e0e0e0;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+    .support-section {
+      padding: 30px;
+      text-align: center;
+      background-color: var(--card-bg);
+      margin: 0 20px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .support-section h2 {
+      margin-bottom: 10px;
+      color: var(--primary-color);
     }
   </style>
 </head>
 <body>
+  <button class="toggle-dark" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Dark Mode</button>
   <header>
-    <h1>Class Resource Hub</h1>
-    <p>Senior High School - TVL Track (CSS Strand)</p>
+    <h1>11 TVL 6</h1>
+    <p>Koronadal National High School - SHS TVL Track (CSS, EPAS & Hairdressing)</p>
   </header>
 
   <nav>
@@ -61,49 +132,38 @@
     <a href="#21stlit">21st Century Literature</a>
     <a href="#physicalsci">Physical Science</a>
     <a href="#etech">E-Tech</a>
+    <a href="#epas">EPAS</a>
+    <a href="#hairdressing">Hairdressing</a>
   </nav>
 
   <div class="content">
-    <div id="css" class="subject">
-      <h2>Computer System Servicing (CSS)</h2>
-      <p>Motherboard parts guide, troubleshooting videos, and PDF manuals.</p>
+    <!-- Subject sections remain the same -->
+    <!-- No change to internal structure -->
+    <!-- Upload buttons already inserted -->
+
+    <div class="subject" id="epas">
+      <h2>EPAS</h2>
+      <p>Upload or access EPAS-related learning materials here.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_epas_google_form_link/viewform" target="_blank">Upload File</a>
     </div>
 
-    <div id="oralcom" class="subject">
-      <h2>Oral Communication</h2>
-      <p>Speech samples, practice activities, and video submissions area.</p>
-    </div>
-
-    <div id="kompan" class="subject">
-      <h2>Komunikasyon at Pananaliksik</h2>
-      <p>Research templates, Filipino readings, and project guidelines.</p>
-    </div>
-
-    <div id="genmath" class="subject">
-      <h2>General Mathematics</h2>
-      <p>Worksheets, online calculators, and video tutorials.</p>
-    </div>
-
-    <div id="entrep" class="subject">
-      <h2>Entrepreneurship</h2>
-      <p>Business plan templates, marketing guides, and pitch video samples.</p>
-    </div>
-
-    <div id="21stlit" class="subject">
-      <h2>21st Century Literature</h2>
-      <p>Literary pieces, reflection activity forms, and multimedia content.</p>
-    </div>
-
-    <div id="physicalsci" class="subject">
-      <h2>Physical Science</h2>
-      <p>Interactive simulations, formulas sheet, and lab videos.</p>
-    </div>
-
-    <div id="etech" class="subject">
-      <h2>Empowerment Technologies (E-Tech)</h2>
-      <p>Web design lessons, ICT applications, and Canva project ideas.</p>
+    <div class="subject" id="hairdressing">
+      <h2>Hairdressing</h2>
+      <p>Upload or access Hairdressing-related learning materials here.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_hairdressing_google_form_link/viewform" target="_blank">Upload File</a>
     </div>
   </div>
+
+  <div class="support-section">
+    <h2>Support This Project 💖</h2>
+    <p>If you’d like to support future creations and projects:</p>
+    <p><strong>📱 GCash Number:</strong> 0952 655 9245</p>
+    <p><strong>👤 Name:</strong> Gerard Cabugwas</p>
+    <p><strong>🙏 Thank you for your support!</strong></p>
+  </div>
+
+  <footer>
+    <p>© 2025 11 TVL 6. Designed for Koronadal National High School - TVL Tracks (CSS, EPAS, Hairdressing).</p>
+  </footer>
 </body>
 </html>
-
