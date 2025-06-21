@@ -1,200 +1,179 @@
+Here’s the **full HTML** you can paste into your GitHub site or editor. It includes the main layout and subject links you've set:
+
+---
+
+### ✅ Full Working HTML Code
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>11-TVL-6 CLASS RESOURCE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>11 TVL 6 Resource Hub</title>
   <style>
-    :root {
-      --primary-color: #004225;
-      --accent-color: #ffc300;
-      --bg-color: #f9f9f9;
-      --text-color: #1a1a1a;
-      --card-bg: #ffffff;
-    }
-    body.dark-mode {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --card-bg: #1e1e1e;
-    }
-    * { box-sizing: border-box; }
     body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-    header {
-      background-color: var(--primary-color);
-      color: var(--accent-color);
       padding: 20px;
+      color: #333;
+    }
+
+    h1 {
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      color: #b00000;
     }
-    .toggle-dark {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--accent-color);
-      color: #000;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+
     .filter-buttons {
       text-align: center;
-      margin: 20px 0;
+      margin-bottom: 20px;
     }
+
     .filter-buttons button {
-      background-color: var(--accent-color);
-      color: #000;
+      margin: 0 10px;
+      padding: 10px 20px;
       border: none;
-      padding: 8px 14px;
-      margin: 5px;
-      border-radius: 6px;
+      background-color: #333;
+      color: #fff;
       cursor: pointer;
-      font-weight: bold;
+      border-radius: 5px;
     }
-    .filter-buttons button:hover {
-      background-color: #ffe066;
+
+    .filter-buttons button.active {
+      background-color: #b00000;
     }
+
     .content {
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
     }
+
     .subject {
-      background: var(--card-bg);
+      border: 2px solid #ddd;
       border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s;
+      padding: 15px;
+      width: 260px;
+      background-color: #f9f9f9;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
     }
-    .subject:hover { transform: scale(1.02); }
-    .subject h2 {
+
+    .subject:hover {
+      transform: scale(1.02);
+    }
+
+    .subject.specialized h2::after {
+      content: " 🔴";
+    }
+
+    h2 {
       margin-top: 0;
-      color: var(--primary-color);
+      font-size: 1.2rem;
     }
-    .subject a {
+
+    a {
+      text-decoration: none;
+      color: white;
+      background-color: #b00000;
+      padding: 8px 12px;
+      border-radius: 5px;
       display: inline-block;
       margin-top: 10px;
-      background-color: var(--accent-color);
-      color: #000;
-      padding: 8px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
     }
-    .subject a:hover {
-      background-color: #ffe066;
+
+    a:hover {
+      background-color: #ff4400;
     }
-    footer {
-      background: var(--primary-color);
-      color: #e0e0e0;
-      text-align: center;
-      padding: 10px;
-      font-size: 14px;
-    }
-    .support-section {
-      padding: 30px;
-      text-align: center;
-      background-color: var(--card-bg);
-      margin: 0 20px 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .support-section h2 {
-      margin-bottom: 10px;
-      color: var(--primary-color);
+
+    .hidden {
+      display: none;
     }
   </style>
-  <script>
-    function filterSubjects(category) {
-      const allSubjects = document.querySelectorAll('.subject');
-      allSubjects.forEach(subject => {
-        const isSpecialized = subject.classList.contains('specialized');
-        const isCore = subject.classList.contains('core');
-        if (category === 'all') {
-          subject.style.display = 'block';
-        } else if (category === 'core') {
-          subject.style.display = isCore ? 'block' : 'none';
-        } else if (category === 'specialized') {
-          subject.style.display = isSpecialized ? 'block' : 'none';
-        }
-      });
-    }
-  </script>
 </head>
 <body>
-  <button class="toggle-dark" onclick="document.body.classList.toggle('dark-mode')">🌓 Toggle Dark Mode</button>
-  <header>
-    <h1>11 TVL 6</h1>
-    <p>Koronadal National High School - SHS TVL Track (CSS, EPAS & Hairdressing)</p>
-  </header>
+
+  <h1>11 TVL 6 Resource Hub</h1>
 
   <div class="filter-buttons">
-    <button onclick="filterSubjects('all')">All Subjects</button>
+    <button onclick="filterSubjects('all')" class="active">All</button>
     <button onclick="filterSubjects('core')">Core Subjects</button>
     <button onclick="filterSubjects('specialized')">Specialized Subjects</button>
   </div>
 
   <div class="content">
     <div class="subject specialized" id="css">
-      <h2>CSS <span style="font-size: 14px; color: red; font-weight: bold;">(Specialized)</span></h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <h2>CSS</h2>
+      <a href="https://drive.google.com/drive/folders/1D84hULwg2iCnaPhceH8Io09vO-MhxoJB" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="oralcom">
       <h2>Oral Communication</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/1xXo0C9r7PtTSdlzuqghuqmiUtyoq4wN-" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="kompan">
       <h2>Kom Pan</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/1MHe-9bYBZW2veoIrSaTtSdxm8nPB4-5B" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="genmath">
       <h2>General Mathematics</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/1XfV0yfmEVbW14Nv5aV21NXqUERjPjFEd" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="entrep">
       <h2>Entrepreneurship</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/1u1TtwyRAcrzqbIXC8QCA9oAJXRXnB7L4" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="21stlit">
       <h2>21st Century Literature</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/1OLGx9ntkPpOwa2zDc9YHNdH-kMVNSruF" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="physicalsci">
       <h2>Physical Science</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/11WMI5OCv73GNRw92zGQbRxMbS5oUyjla" target="_blank">📁 View Files</a>
     </div>
     <div class="subject core" id="etech">
       <h2>E-Tech</h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <a href="https://drive.google.com/drive/folders/1aErXUmQjdEbfzz3OmLM8zzzFmbDyq1g8" target="_blank">📁 View Files</a>
     </div>
     <div class="subject specialized" id="epas">
-      <h2>EPAS <span style="font-size: 14px; color: red; font-weight: bold;">(Specialized)</span></h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <h2>EPAS</h2>
+      <a href="https://drive.google.com/drive/folders/1UIeT8F_1Voz66VaoMUQRYf9nTo33xiad" target="_blank">📁 View Files</a>
     </div>
     <div class="subject specialized" id="hairdressing">
-      <h2>Hairdressing <span style="font-size: 14px; color: red; font-weight: bold;">(Specialized)</span></h2>
-      <a href="https://forms.gle/TmuonBn12g24iZyu5" target="_blank">Upload File</a>
+      <h2>Hairdressing</h2>
+      <a href="https://drive.google.com/drive/folders/1diwlSrtLlMQRQlfbfJ26dqEWtHbnXoSu" target="_blank">📁 View Files</a>
     </div>
   </div>
 
-  <div class="support-section">
-    <h2>Support This Project 💖</h2>
-    <p>If you’d like to support future creations and projects:</p>
-    <p><strong>📱 GCash Number:</strong> 0952 655 9245</p>
-    <p><strong>👤 Name:</strong> Gerard Cabugwas</p>
-    <p><strong>🙏 Thank you for your support!</strong></p>
-  </div>
+  <script>
+    function filterSubjects(type) {
+      document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.filter-buttons button[onclick="filterSubjects('${type}')"]`).classList.add('active');
 
-  <footer>
-    <p>© 2025 11 TVL 6. Designed for Koronadal National High School - TVL Tracks (CSS, EPAS, Hairdressing).</p>
-  </footer>
+      const allSubjects = document.querySelectorAll('.subject');
+      allSubjects.forEach(subject => {
+        if (type === 'all') {
+          subject.classList.remove('hidden');
+        } else {
+          subject.classList.toggle('hidden', !subject.classList.contains(type));
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
+```
+
+---
+
+✅ You can now paste this whole file into your GitHub `index.html`.
+
+Let me know if you want:
+
+* A mobile-friendly tweak
+* “Last updated” info
+* Add a GCash donation section again
+
+You're fully set to go live!
