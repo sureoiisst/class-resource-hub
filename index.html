@@ -11,26 +11,43 @@
       margin: 0;
       padding: 20px;
       color: #333;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    h1 {
-      text-align: center;
-      color: #b00000;
-    }
-
-    .filter-buttons {
+    header {
       text-align: center;
       margin-bottom: 20px;
     }
 
+    header img.logo {
+      height: 80px;
+      transition: transform 0.3s ease;
+    }
+
+    header img.logo:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      color: #b00000;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
     .filter-buttons button {
-      margin: 0 10px;
       padding: 10px 20px;
       border: none;
       background-color: #333;
       color: #fff;
       cursor: pointer;
       border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
 
     .filter-buttons button.active {
@@ -51,7 +68,15 @@
       width: 260px;
       background-color: #f9f9f9;
       box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     .subject:hover {
@@ -89,6 +114,7 @@
     .hidden {
       display: none;
     }
+
     #backToTop {
       position: fixed;
       bottom: 30px;
@@ -141,10 +167,13 @@
 </head>
 <body>
 
+  <header>
+    <img src="https://sureoiisst.github.io/class-resource-hub/assets/knchs-logo.png" alt="KNCHS Logo" class="logo">
+    <h1>11 TVL 6 Resource Hub</h1>
+  </header>
+
   <button onclick="toggleUploads()" style="position: fixed; bottom: 80px; right: 30px; padding: 10px; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 999;">🔐 Teacher Upload Access</button>
   <button id="darkModeToggle" onclick="toggleDarkMode()" style="position: fixed; top: 20px; right: 20px; padding: 10px; border: none; background-color: #b00000; color: white; border-radius: 5px; cursor: pointer;">🌙 Dark Mode</button>
-
-  <h1>11 TVL 6 Resource Hub</h1>
 
   <div class="filter-buttons">
     <button onclick="filterSubjects('all')" class="active">All</button>
@@ -152,30 +181,7 @@
     <button onclick="filterSubjects('specialized')">Specialized Subjects</button>
   </div>
 
-  <div class="content">
-    <script>
-      const subjects = [
-        { id: 'css', title: 'CSS', link: '1D84hULwg2iCnaPhceH8Io09vO-MhxoJB', type: 'specialized' },
-        { id: 'epas', title: 'EPAS', link: '1UIeT8F_1Voz66VaoMUQRYf9nTo33xiad', type: 'specialized' },
-        { id: 'hairdressing', title: 'Hairdressing', link: '1diwlSrtLlMQRQlfbfJ26dqEWtHbnXoSu', type: 'specialized' },
-        { id: 'oralcom', title: 'Oral Communication', link: '1xXo0C9r7PtTSdlzuqghuqmiUtyoq4wN-', type: 'core' },
-        { id: 'kompan', title: 'Kom Pan', link: '1MHe-9bYBZW2veoIrSaTtSdxm8nPB4-5B', type: 'core' },
-        { id: 'genmath', title: 'Gen Math', link: '1XfV0yfmEVbW14Nv5aV21NXqUERjPjFEd', type: 'core' },
-        { id: 'entrep', title: 'Entrepreneurship', link: '1u1TtwyRAcrzqbIXC8QCA9oAJXRXnB7L4', type: 'core' },
-        { id: '21stlit', title: '21st Century Lit', link: '1OLGx9ntkPpOwa2zDc9YHNdH-kMVNSruF', type: 'core' },
-        { id: 'physicalsci', title: 'Physical Science', link: '11WMI5OCv73GNRw92zGQbRxMbS5oUyjla', type: 'core' },
-        { id: 'etech', title: 'E-Tech', link: '1aErXUmQjdEbfzz3OmLM8zzzFmbDyq1g8', type: 'core' },
-      ];
-
-      document.write(subjects.map(s => `
-        <div class="subject ${s.type}" id="${s.id}">
-          <h2>${s.title}</h2>
-          <a href="https://drive.google.com/drive/folders/${s.link}" target="_blank">📁 View Files</a>
-          <a href="https://drive.google.com/drive/folders/${s.link}" class="upload-link" target="_blank" style="display:none; margin-left: 10px; font-size: 0.9em; background-color:#444;">🔒 Upload (Teachers)</a>
-        </div>
-      `).join(''));
-    </script>
-  </div>
+  <div class="content" id="subjectContainer"></div>
 
   <footer style="text-align:center; margin-top: 40px; font-size: 0.95rem; color: #555;">
     <hr style="margin-bottom: 10px;">
@@ -187,6 +193,28 @@
   <button id="backToTop" onclick="scrollToTop()">⬆ Back to Top</button>
 
   <script>
+    const subjects = [
+      { id: 'css', title: 'CSS', link: '1D84hULwg2iCnaPhceH8Io09vO-MhxoJB', type: 'specialized' },
+      { id: 'epas', title: 'EPAS', link: '1UIeT8F_1Voz66VaoMUQRYf9nTo33xiad', type: 'specialized' },
+      { id: 'hairdressing', title: 'Hairdressing', link: '1diwlSrtLlMQRQlfbfJ26dqEWtHbnXoSu', type: 'specialized' },
+      { id: 'oralcom', title: 'Oral Communication', link: '1xXo0C9r7PtTSdlzuqghuqmiUtyoq4wN-', type: 'core' },
+      { id: 'kompan', title: 'Kom Pan', link: '1MHe-9bYBZW2veoIrSaTtSdxm8nPB4-5B', type: 'core' },
+      { id: 'genmath', title: 'Gen Math', link: '1XfV0yfmEVbW14Nv5aV21NXqUERjPjFEd', type: 'core' },
+      { id: 'entrep', title: 'Entrepreneurship', link: '1u1TtwyRAcrzqbIXC8QCA9oAJXRXnB7L4', type: 'core' },
+      { id: '21stlit', title: '21st Century Lit', link: '1OLGx9ntkPpOwa2zDc9YHNdH-kMVNSruF', type: 'core' },
+      { id: 'physicalsci', title: 'Physical Science', link: '11WMI5OCv73GNRw92zGQbRxMbS5oUyjla', type: 'core' },
+      { id: 'etech', title: 'E-Tech', link: '1aErXUmQjdEbfzz3OmLM8zzzFmbDyq1g8', type: 'core' },
+    ];
+
+    const container = document.getElementById("subjectContainer");
+    container.innerHTML = subjects.map(s => `
+      <div class="subject ${s.type}" id="${s.id}">
+        <h2>${s.title}</h2>
+        <a href="https://drive.google.com/drive/folders/${s.link}" target="_blank">📁 View Files</a>
+        <a href="https://drive.google.com/drive/folders/${s.link}" class="upload-link" target="_blank" style="display:none; margin-left: 10px; font-size: 0.9em; background-color:#444;">🔒 Upload (Teachers)</a>
+      </div>
+    `).join("");
+
     const backToTopBtn = document.getElementById('backToTop');
     window.onscroll = function () {
       backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
@@ -214,3 +242,4 @@
   </script>
 </body>
 </html>
+
