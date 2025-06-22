@@ -19,15 +19,6 @@
       margin-bottom: 20px;
     }
 
-    header img.logo {
-      height: 80px;
-      transition: transform 0.3s ease;
-    }
-
-    header img.logo:hover {
-      transform: scale(1.05);
-    }
-
     h1 {
       color: #b00000;
     }
@@ -132,6 +123,7 @@
     .dark-mode {
       background-color: #111;
       color: #eee;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .dark-mode .subject.specialized {
@@ -168,12 +160,13 @@
 <body>
 
   <header>
-    <img src="https://sureoiisst.github.io/class-resource-hub/assets/knchs-logo.png" alt="KNCHS Logo" class="logo">
     <h1>11 TVL 6 Resource Hub</h1>
   </header>
 
   <button onclick="toggleUploads()" style="position: fixed; bottom: 80px; right: 30px; padding: 10px; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 999;">🔐 Teacher Upload Access</button>
-  <button id="darkModeToggle" onclick="toggleDarkMode()" style="position: fixed; top: 20px; right: 20px; padding: 10px; border: none; background-color: #b00000; color: white; border-radius: 5px; cursor: pointer;">🌙 Dark Mode</button>
+  <button id="darkModeToggle" onclick="toggleDarkMode()" style="position: fixed; top: 20px; right: 20px; padding: 10px; border: none; background-color: #b00000; color: white; border-radius: 5px; cursor: pointer;">
+    <span id="modeIcon">🌙</span>
+  </button>
 
   <div class="filter-buttons">
     <button onclick="filterSubjects('all')" class="active">All</button>
@@ -226,6 +219,8 @@
 
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
+      const icon = document.getElementById('modeIcon');
+      icon.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
     }
 
     function toggleUploads() {
@@ -242,4 +237,3 @@
   </script>
 </body>
 </html>
-
